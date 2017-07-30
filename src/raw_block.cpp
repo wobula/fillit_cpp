@@ -18,43 +18,43 @@ raw_block::~raw_block()
 
 int raw_block::extract(char *filename)
 {
-	char buff[21];
+	char buff[22];
 
 	std::ifstream stream(filename);
+	std::string buffer;
 	if (stream.is_open())
 	{
 		std::cout << "--opened a file: " << filename << std::endl;
 		while (stream.read(buff, 21))
+		{
+			buff[21] = '\0';
 			raw.push_back(buff);
+		}
 		raw.push_back(buff);
 		return (1);
 	}
 	return (0);
 }
 
-int raw_block::validate()
+int raw_block::validate(void)
 {
 	unsigned int i = -1;
 	std::cout << raw.size() << std::endl;
 	while (++i < raw.size())
 	{
-		std::cout << raw[i] << std::endl;
+		if (!validate_characters(raw[i]))
+			return (0);
 	}
 	return (1);
 }
 
-int raw_block::valid_characters(std::string str)
+int raw_block::validate_characters(std::string str)
 {
 	unsigned int i = -1;
-	char 		 c = 0;
-	while (++i <= str.size() && (c = str[i]))
+	while (str[++i])
 	{
-		if (c != '\n' && c != '.' && c != '#')
-		{
-			std::cout << "Error: invalid symbol: " << c << std::endl;
-			return (0);
-		}
+		std::cout << str[i];
 	}
-	std::cout << "--characters validated" << std::endl;
+	std::cout << std::endl;
 	return (1);
 }

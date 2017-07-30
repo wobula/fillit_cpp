@@ -11,8 +11,8 @@ class raw_block
 		raw_block();
 		~raw_block();
 		int extract(char *filename);
-		int validate();
-		int valid_characters(std::string str);
+		int validate(void);
+		int validate_characters(std::string str);
 	private:
 		std::vector<std::string> raw;
 };
