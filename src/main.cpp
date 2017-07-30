@@ -22,7 +22,8 @@ int	main(int argc, char **argv)
 	if (parse_args(argc, argv))
 	{
 		std::cout << "-Validating blocks" << std::endl;
-		test.validate(argv[1]);
+		test.extract(argv[1]);
+		test.validate();
 	}
 	return (0);
 }
