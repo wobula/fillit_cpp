@@ -12,7 +12,7 @@ class raw_block
 		~raw_block();
 		int extract(char *filename);
 		int validate(void);
-		int validate_characters(std::string str);
+		int validate_characters(std::string str, int i);
 	private:
 		std::vector<std::string> raw;
 };

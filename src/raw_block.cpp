@@ -39,22 +39,28 @@ int raw_block::extract(char *filename)
 int raw_block::validate(void)
 {
 	unsigned int i = -1;
-	std::cout << raw.size() << std::endl;
+	std::cout << "--Block count: " << raw.size() << std::endl;
 	while (++i < raw.size())
 	{
-		if (!validate_characters(raw[i]))
+		if (!validate_characters(raw[i], i))
 			return (0);
 	}
 	return (1);
 }
 
-int raw_block::validate_characters(std::string str)
+int raw_block::validate_characters(std::string str, int x)
 {
 	unsigned int i = -1;
+	std::cout << "--Validating block: " << x << std::endl;
+	std::cout << str;
 	while (str[++i])
 	{
-		std::cout << str[i];
+		if (str[i] != '.' && str[i] != '#' && str[i] != '\n')
+		{
+			std::cout << "Error: invalid character: " << str[i];
+			return (0);
+		}
 	}
-	std::cout << std::endl;
+	std::cout << "--Validated!" << std::endl;
 	return (1);
 }
