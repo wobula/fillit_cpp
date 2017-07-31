@@ -54,12 +54,12 @@ int raw_block::validate_characters(std::string str, int x)
 {
 	unsigned int i = -1;
 	std::cout << "--Validating characters for block: " << x << std::endl;
-	std::cout << str;
+	std::cout << str << std::endl;
 	while (str[++i])
 	{
 		if (str[i] != '.' && str[i] != '#' && str[i] != '\n')
 		{
-			std::cout << "Error: invalid character: " << str[i];
+			std::cout << "Error: invalid character: " << str[i] << std::endl;
 			return (0);
 		}
 	}
@@ -83,11 +83,27 @@ int raw_block::validate_count(std::string str, int x)
 		else if (str[i] == '\n')
 			newline++;
 	}
-	if (pound == 4 || period == 12)
+	if (pound == 4 && period == 12 && newline == 5)
 	{
 		std::cout << "--Validated: " << pound << period << newline << std::endl;
 		return (1);
 	}
 	std::cout << "Error: invalid composition: " << pound << period << newline << std::endl;
 	return (0);
+}
+
+int raw_block::validate_newline_pos(std::string str, int x)
+{
+	unsigned int i = -1;
+
+	while (str[++i])
+	{
+		if (str[i] == '\n' && i % 5 != 0)
+		{
+			std::cout << "Error: invalid newline position" << std::endl;
+			return (0);
+		}
+	}
+	std::cout << "--Validated all newline positions for block " << x << std::endl;
+	return (1);
 }
