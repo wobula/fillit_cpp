@@ -24,7 +24,7 @@ int raw_block::extract(char *filename)
 	std::string buffer;
 	if (stream.is_open())
 	{
-		std::cout << "--opened a file: " << filename << std::endl;
+		std::cout << "--opened: " << filename << std::endl;
 		while (stream.read(buff, 21))
 		{
 			buff[21] = '\0';
@@ -44,6 +44,8 @@ int raw_block::validate(void)
 	{
 		if (!validate_characters(raw[i], i))
 			return (0);
+		if (!validate_count(raw[i], i))
+			return (0);
 	}
 	return (1);
 }
@@ -51,7 +53,7 @@ int raw_block::validate(void)
 int raw_block::validate_characters(std::string str, int x)
 {
 	unsigned int i = -1;
-	std::cout << "--Validating block: " << x << std::endl;
+	std::cout << "--Validating characters for block: " << x << std::endl;
 	std::cout << str;
 	while (str[++i])
 	{
@@ -63,4 +65,29 @@ int raw_block::validate_characters(std::string str, int x)
 	}
 	std::cout << "--Validated!" << std::endl;
 	return (1);
+}
+
+int raw_block::validate_count(std::string str, int x)
+{
+	unsigned int i = -1;
+	int			 pound = 0;
+	int 		 period = 0;
+	int 		 newline = 0;
+	std::cout << "--Validating count for block: " << x << std::endl;
+	while (str[++i])
+	{
+		if (str[i] == '#')
+			pound++;
+		else if (str[i] == '.')
+			period++;
+		else if (str[i] == '\n')
+			newline++;
+	}
+	if (pound == 4 || period == 12)
+	{
+		std::cout << "--Validated: " << pound << period << newline << std::endl;
+		return (1);
+	}
+	std::cout << "Error: invalid composition: " << pound << period << newline << std::endl;
+	return (0);
 }
