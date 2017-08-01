@@ -154,3 +154,8 @@ int raw_block::validate_tetrimino(std::string str, int x)
 	std::cout << "--Error: invalid tetrimino composition for block " << x << std::endl;
 	return (0);
 }
+
+std::vector<std::string> raw_block::getVector()
+{
+	return (raw);
+}
