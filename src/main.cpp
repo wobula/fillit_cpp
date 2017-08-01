@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "raw_block.hpp"
+#include "val_block.hpp"
 
 int parse_args(int argc, char **argv)
 {
@@ -23,7 +24,11 @@ int	main(int argc, char **argv)
 	{
 		std::cout << "-Validating blocks" << std::endl;
 		test.extract(argv[1]);
-		test.validate();
+		if (test.validate())
+		{
+			std::cout << "convert validated block into coordinate system" << std::endl;
+			val_block solve(test);
+		}
 	}
 	return (0);
 }

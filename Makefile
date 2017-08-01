@@ -21,6 +21,7 @@ NAME = fillit
 
 SRCS =	   src/main.cpp \
 		   src/raw_block.cpp \
+		   src/val_block.cpp \
 
 all: $(NAME)
 
