@@ -46,7 +46,10 @@ int raw_block::validate(void)
 			return (0);
 		if (!validate_count(raw[i], i))
 			return (0);
+		if (!validate_tetrimino(raw[i], i))
+			return (0);
 	}
+	std::cout << "-Validation complete!" << std::endl;
 	return (1);
 }
 
@@ -63,7 +66,6 @@ int raw_block::validate_characters(std::string str, int x)
 			return (0);
 		}
 	}
-	std::cout << "--Validated!" << std::endl;
 	return (1);
 }
 
@@ -106,4 +108,49 @@ int raw_block::validate_newline_pos(std::string str, int x)
 	}
 	std::cout << "--Validated all newline positions for block " << x << std::endl;
 	return (1);
+}
+
+int raw_block::validate_tetrimino(std::string str, int x)
+{
+	unsigned int i = -1;
+	int 		 pound = 0;
+
+	while (str[++i])
+	{
+		if (str[i] == '#')
+		{
+			pound++;
+			if (str[i + 1] == '#')
+				pound++;
+			if (str[i + 2] == '#')
+				pound++;
+			if (str[i + 3] == '#')
+				pound++;
+			if (str[i + 4] == '#')
+				pound++;
+			if (str[i + 5] == '#')
+				pound++;
+			if (str[i + 6] == '#')
+				pound++;
+			if (str[i + 7] == '#')
+				pound++;
+			if (str[i + 9] == '#')
+				pound++;
+			if (str[i + 10] == '#')
+				pound++;
+			if (str[i + 11] == '#')
+				pound++;
+			if (str[i + 15] == '#')
+				pound++;
+			break ;
+		}
+	}
+	std::cout << "Tetrimino count: " << pound << std::endl;
+	if (pound == 4)
+	{
+		std::cout << "--Validated tetrimino composition for block " << x << std::endl;
+		return (1);
+	}
+	std::cout << "--Error: invalid tetrimino composition for block " << x << std::endl;
+	return (0);
 }

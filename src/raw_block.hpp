@@ -15,6 +15,7 @@ class raw_block
 		int validate_characters(std::string str, int i);
 		int validate_count(std::string str, int x);
 		int validate_newline_pos(std::string str, int x);
+		int validate_tetrimino(std::string str, int x);
 	private:
 		std::vector<std::string> raw;
 };
