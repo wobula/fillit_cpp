@@ -13,9 +13,11 @@ class val_block
 		~val_block();
 		int convert_to_xy(void);
 		void extract_cords(std::string str, unsigned int i);
+		void find_smallest_map(int block_count);
 	private:
 		raw_block* valid;
 		int** 	  coords;
+		int 	  min_board_size;
 };
 
 #endif

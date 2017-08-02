@@ -1,10 +1,12 @@
 #include <iostream>
+#include <math.h>
 #include "val_block.hpp"
 
 val_block::val_block(raw_block &test) : valid(&test)
 {
 	std::cout << "+val block created" << std::endl;
 	convert_to_xy();
+	find_smallest_map(valid->getVector().size());
 }
 
 val_block::~val_block()
@@ -102,4 +104,15 @@ void val_block::extract_cords(std::string str, unsigned int i)
 			return ;
 		}
 	}
+}
+
+void val_block::find_smallest_map(int block_count)
+{
+	int size;
+
+	std::cout << "-Finding smallest map" << std::endl;
+	while (!(size = sqrt(block_count)))
+		block_count++;
+	std::cout << "--Your minimum board size is: " << size << std::endl;
+	min_board_size = size;
 }
