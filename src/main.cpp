@@ -25,10 +25,7 @@ int	main(int argc, char **argv)
 		std::cout << "-Validating blocks" << std::endl;
 		test.extract(argv[1]);
 		if (test.validate())
-		{
-			std::cout << "convert validated block into coordinate system" << std::endl;
 			val_block solve(test);
-		}
 	}
 	return (0);
 }
