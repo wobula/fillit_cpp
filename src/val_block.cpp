@@ -2,7 +2,10 @@
 #include <math.h>
 #include "val_block.hpp"
 
-val_block::val_block(raw_block &test) : valid(&test)
+val_block::val_block(raw_block &test) : valid(&test),
+										current_block(0),
+										letter('A'),
+										total_blocks(valid->getVector().size())
 {
 	std::cout << "+val block created" << std::endl;
 	convert_to_xy();
@@ -116,3 +119,25 @@ void val_block::find_smallest_map(int block_count)
 	std::cout << "--Your minimum board size is: " << size << std::endl;
 	min_board_size = size;
 }
+/*
+void val_block::reset_resize()
+{
+	current_block = 0;
+	letter = 'A';
+	min_board_size++;
+	//delete old board
+	//create a new board
+}
+*/
+/*
+void val_block::empty_board()
+{
+
+	board = new std::string*[min_board_size];
+	std::string::iterator x = board.begin();
+	while (x != board.end())
+	{
+		board = '.';
+		x++;
+	}
+}*/
