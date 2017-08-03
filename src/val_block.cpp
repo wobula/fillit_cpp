@@ -2,6 +2,7 @@
 #include <math.h>
 #include <cstring>
 #include "val_block.hpp"
+#include <stdlib.h>
 
 val_block::val_block(raw_block &test) : valid(&test),
 										current_block(0),
@@ -11,13 +12,21 @@ val_block::val_block(raw_block &test) : valid(&test),
 	std::cout << "+val block created" << std::endl;
 	convert_to_xy();
 	find_smallest_map(valid->getVector().size());
+	empty_board();
+	getBoard();
 }
 
 val_block::~val_block()
 {
 	delete coords;
 	std::cout << "+val block destroyed" << std::endl;
-	val_block::empty_board();
+}
+
+void val_block::getBoard(void)
+{
+	std::vector<std::string>::iterator row = board.begin() - 1;
+	while (++row != board.end())
+		std::cout << *row << std::endl;
 }
 
 int val_block::convert_to_xy(void)
@@ -124,17 +133,19 @@ void val_block::find_smallest_map(int block_count)
 
 void val_block::empty_board()
 {
-	board = new std::string(min_board_size + 1, ' ');
-	std::string::iterator it = board->begin() - 1;
-	int x = 0;
-	while (++it != board->end())
-	{
-		if (x % (min_board_size + 1) == 0)
-			*it = '\n';
-		else
-			*it = '.';
-		x++;
-	}
-	std::cout << *board << std::endl;
-	std::cout << min_board_size << std::endl;
+	int x = -1;
+	char	*ptr;
+
+	std::cout << "-Creating empty board" << std::endl;
+	ptr = (char*)malloc(sizeof(char) * (min_board_size + 1));
+	ptr[min_board_size] = '\0';
+	while (++x < min_board_size)
+		ptr[x] = '.';
+	std::string tmp = ptr;
+	x = -1;
+	while (++x < min_board_size)
+		board.push_back(tmp);
+	free(ptr);
+	ptr = NULL;
+	std::cout << "--Board created!" << std::endl;
 }

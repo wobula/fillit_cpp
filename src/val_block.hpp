@@ -16,7 +16,7 @@ class val_block
 		void 			extract_cords(std::string str, unsigned int i);
 		void 			find_smallest_map(int block_count);
 		void 			empty_board();
-		//void 			reset_resize();
+		void 			getBoard();
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;
@@ -24,7 +24,7 @@ class val_block
 		int** 	  		coords;
 		int 	  		min_board_size;
 		int 	  		total_blocks;
-		std::string* 	board;
+		std::vector<std::string> board;
 };
 
 #endif
