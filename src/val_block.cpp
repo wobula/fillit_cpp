@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <cstring>
 #include "val_block.hpp"
 
 val_block::val_block(raw_block &test) : valid(&test),
@@ -16,6 +17,7 @@ val_block::~val_block()
 {
 	delete coords;
 	std::cout << "+val block destroyed" << std::endl;
+	val_block::empty_board();
 }
 
 int val_block::convert_to_xy(void)
@@ -119,25 +121,20 @@ void val_block::find_smallest_map(int block_count)
 	std::cout << "--Your minimum board size is: " << size << std::endl;
 	min_board_size = size;
 }
-/*
-void val_block::reset_resize()
-{
-	current_block = 0;
-	letter = 'A';
-	min_board_size++;
-	//delete old board
-	//create a new board
-}
-*/
-/*
+
 void val_block::empty_board()
 {
-
-	board = new std::string*[min_board_size];
-	std::string::iterator x = board.begin();
-	while (x != board.end())
+	board = new std::string(min_board_size + 1, ' ');
+	std::string::iterator it = board->begin() - 1;
+	int x = 0;
+	while (++it != board->end())
 	{
-		board = '.';
+		if (x % (min_board_size + 1) == 0)
+			*it = '\n';
+		else
+			*it = '.';
 		x++;
 	}
-}*/
+	std::cout << *board << std::endl;
+	std::cout << min_board_size << std::endl;
+}
