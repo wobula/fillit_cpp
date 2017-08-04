@@ -14,12 +14,48 @@ val_block::val_block(raw_block &test) : valid(&test),
 	find_smallest_map(valid->getVector().size());
 	empty_board();
 	getBoard();
+	std::cout << "-Recursion started" << std::endl;
+	while (!recurse(board))
+		increaseMapSize();
 }
 
 val_block::~val_block()
 {
 	delete coords;
 	std::cout << "+val block destroyed" << std::endl;
+}
+
+int	 val_block::recurse(std::vector<std::string> board)
+{
+	std::size_t row = -1;
+	std::size_t col = -1;
+	while (++row < board.size() && current_block < total_blocks)
+	{
+		col = -1;
+		while (++col < board[row].size() && current_block < total_blocks)
+		{
+			if (board[row][col] == '.')
+			{
+				std::cout << board[row][col] << "putblock function goes here" << std::endl;
+				// if (putblock(board, row, col, coords[current_block])
+				//		break ;
+			}
+		}
+	}
+	std::cout << "current block: " << current_block << "total blocks: " << total_blocks << std::endl;
+	if (current_block == total_blocks)
+		return (1);
+	std::cout << "--No solution found with board size: " << min_board_size << std::endl;
+	return (0);
+}
+
+void val_block::increaseMapSize(void)
+{
+	current_block = 0;
+	letter = 'A';
+	min_board_size++;
+	board.clear();
+	empty_board();
 }
 
 void val_block::getBoard(void)
@@ -40,7 +76,7 @@ int val_block::convert_to_xy(void)
 		coords[i] = new int[8];
 		extract_cords((valid->getVector())[i], i);
 	}
-	std::cout << "-Conversion complete!" << std::endl;
+	std::cout << "--Conversion complete!" << std::endl;
 	return (1);
 }
 
@@ -49,7 +85,7 @@ void val_block::extract_cords(std::string str, unsigned int i)
 	int x = -1;
 	int y = -1;
 
-	std::cout << "inside extract cords" << std::endl;
+	std::cout << "-Extracting coords for piece: " << i << std::endl;
 	while (str[++x])
 	{
 		if (str[x] == '#')

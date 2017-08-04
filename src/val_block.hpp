@@ -17,6 +17,8 @@ class val_block
 		void 			find_smallest_map(int block_count);
 		void 			empty_board();
 		void 			getBoard();
+		int	 			recurse(std::vector<std::string> board);
+		void			increaseMapSize(void);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;
