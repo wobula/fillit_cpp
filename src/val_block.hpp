@@ -19,6 +19,7 @@ class val_block
 		void 			getBoard();
 		int	 			recurse(std::vector<std::string> board);
 		void			increaseMapSize(void);
+		int  			putBlock(unsigned int row, unsigned int col, int* coords);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;

@@ -27,8 +27,8 @@ val_block::~val_block()
 
 int	 val_block::recurse(std::vector<std::string> board)
 {
-	std::size_t row = -1;
-	std::size_t col = -1;
+	unsigned int row = -1;
+	unsigned int col = -1;
 	while (++row < board.size() && current_block < total_blocks)
 	{
 		col = -1;
@@ -46,6 +46,35 @@ int	 val_block::recurse(std::vector<std::string> board)
 	if (current_block == total_blocks)
 		return (1);
 	std::cout << "--No solution found with board size: " << min_board_size << std::endl;
+	return (0);
+}
+
+int  val_block::putBlock(unsigned int row, unsigned int col, int* coords)
+{
+	if (board[coords[1] + row][coords[0] + col] == '.')
+	{
+		if (board[coords[3] + row][coords[2] + col] == '.')
+		{
+			if (board[coords[5] + row][coords[4] + col] == '.')
+			{
+				if (board[coords[7] + row][coords[6] + col] == '.')
+				{
+					board[coords[1] + row][coords[0] + col] = letter;
+					board[coords[3] + row][coords[2] + col] = letter;
+					board[coords[5] + row][coords[4] + col] = letter;
+					board[coords[7] + row][coords[6] + col] = letter;
+					letter++;
+					current_block++;
+					if (!recurse(board))
+					{
+						//remove_piece(board); << start here
+						return (0);
+					}
+					return (1);
+				}
+			}
+		}
+	}
 	return (0);
 }
 
