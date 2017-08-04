@@ -20,12 +20,13 @@ class val_block
 		int	 			recurse(std::vector<std::string> board);
 		void			increaseMapSize(void);
 		int  			putBlock(unsigned int row, unsigned int col, int* coords);
+		void 			remove_piece(char remove_letter);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;
 		char 	  		letter;
 		int** 	  		coords;
-		int 	  		min_board_size;
+		unsigned int	min_board_size;
 		int 	  		total_blocks;
 		std::vector<std::string> board;
 };

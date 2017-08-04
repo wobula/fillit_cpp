@@ -11,12 +11,14 @@ val_block::val_block(raw_block &test) : valid(&test),
 {
 	std::cout << "+val block created" << std::endl;
 	convert_to_xy();
-	find_smallest_map(valid->getVector().size());
+	std::cout << total_blocks << std::endl;
+	min_board_size = 4;
 	empty_board();
 	getBoard();
 	std::cout << "-Recursion started" << std::endl;
 	while (!recurse(board))
 		increaseMapSize();
+	getBoard();
 }
 
 val_block::~val_block()
@@ -36,9 +38,8 @@ int	 val_block::recurse(std::vector<std::string> board)
 		{
 			if (board[row][col] == '.')
 			{
-				std::cout << board[row][col] << "putblock function goes here" << std::endl;
-				// if (putblock(board, row, col, coords[current_block])
-				//		break ;
+				if (putBlock(row, col, coords[current_block]))
+					break ;
 			}
 		}
 	}
@@ -51,23 +52,30 @@ int	 val_block::recurse(std::vector<std::string> board)
 
 int  val_block::putBlock(unsigned int row, unsigned int col, int* coords)
 {
-	if (board[coords[1] + row][coords[0] + col] == '.')
+	std::cout << "-Trying to putblock1: " << coords[0] + col << coords[1] + row << std::endl;
+	if (coords[1] + row < min_board_size && coords[0] + col < min_board_size && board[coords[1] + row][coords[0] + col] == '.')
 	{
-		if (board[coords[3] + row][coords[2] + col] == '.')
+		std::cout << "-Trying to putblock2: " << coords[2] + col  << coords[3] + row << std::endl;
+		if (coords[3] + row < min_board_size && coords[2] + col < min_board_size && board[coords[3] + row][coords[2] + col] == '.')
 		{
-			if (board[coords[5] + row][coords[4] + col] == '.')
+			std::cout << "-Trying to putblock3: " << coords[4] + col << coords[5] + row << std::endl;
+			if (coords[5] + row < min_board_size && coords[4] + col < min_board_size && board[coords[5] + row][coords[4] + col] == '.')
 			{
-				if (board[coords[7] + row][coords[6] + col] == '.')
+				std::cout << "-Trying to putblock4: " << coords[6] + col << coords[7] + row << std::endl;
+				if (coords[7] + row < min_board_size && coords[6] + col < min_board_size && board[coords[7] + row][coords[6] + col] == '.')
 				{
+					std::cout << "--Piece fits: " << current_block << " -> " << letter << std::endl;
 					board[coords[1] + row][coords[0] + col] = letter;
 					board[coords[3] + row][coords[2] + col] = letter;
 					board[coords[5] + row][coords[4] + col] = letter;
 					board[coords[7] + row][coords[6] + col] = letter;
 					letter++;
 					current_block++;
+					getBoard();
+					std::cout << "--trying next letter: " << letter << std::endl;
 					if (!recurse(board))
 					{
-						//remove_piece(board); << start here
+						remove_piece(letter);
 						return (0);
 					}
 					return (1);
@@ -75,7 +83,35 @@ int  val_block::putBlock(unsigned int row, unsigned int col, int* coords)
 			}
 		}
 	}
+	std::cout << "--putblock failed" << std::endl;
 	return (0);
+}
+
+void val_block::remove_piece(char remove_letter)
+{
+	unsigned int row = -1;
+	unsigned int col = -1;
+	int count = 0;
+	letter--;
+	current_block--;
+	std::cout << "-Removing piece" << std::endl;
+	while (++row < board.size() && current_block < total_blocks)
+	{
+		col = -1;
+		while (++col < board[row].size() && current_block < total_blocks)
+		{
+			if (board[row][col] == remove_letter)
+			{
+				board[row][col] = '.';
+				count++;
+				if (count == 4)
+				{
+					std::cout << "--Piece removed!" << std::endl;
+					return ;
+				}
+			}
+		}
+	}
 }
 
 void val_block::increaseMapSize(void)
@@ -176,6 +212,7 @@ void val_block::extract_cords(std::string str, unsigned int i)
 				coords[i][++y] = 0;
 				coords[i][++y] = 3;
 			}
+			std::cout << str << std::endl;
 			std::cout << coords[i][0] << coords[i][1] << std::endl;
 			std::cout << coords[i][2] << coords[i][3] << std::endl;
 			std::cout << coords[i][4] << coords[i][5] << std::endl;
@@ -198,7 +235,7 @@ void val_block::find_smallest_map(int block_count)
 
 void val_block::empty_board()
 {
-	int x = -1;
+	unsigned int x = -1;
 	char	*ptr;
 
 	std::cout << "-Creating empty board" << std::endl;
