@@ -139,87 +139,38 @@ int val_block::convert_to_xy(void)
 	while (++i < valid->getVector().size())
 	{
 		coords[i] = new int[8];
-		extract_cords((valid->getVector())[i], i);
+		std::cout << "-Extracting coords for piece: " << i << std::endl;
+		extract_cords((valid->getVector())[i]);
 	}
 	std::cout << "--Conversion complete!" << std::endl;
 	return (1);
 }
 
-void val_block::extract_cords(std::string str, unsigned int i)
+void val_block::extract_cords(std::string str)
 {
 	int x = -1;
-	int y = -1;
 
-	std::cout << "-Extracting coords for piece: " << i << std::endl;
 	while (str[++x])
 	{
 		if (str[x] == '#')
 		{
-			coords[i][++y] = 0;
-			coords[i][++y] = 0;
 			if (str[x + 1] == '#')
-			{
-				coords[i][++y] = 1;
-				coords[i][++y] = 0;
-			}
-			if (str[x + 2] == '#')
-			{
-				coords[i][++y] = 2;
-				coords[i][++y] = 0;
-			}
-			if (str[x + 3] == '#')
-			{
-				coords[i][++y] = 3;
-				coords[i][++y] = 0;
-			}
-			if (str[x + 4] == '#')
-			{
-				coords[i][++y] = 4;
-				coords[i][++y] = 0;
-			}
-			if (str[x + 5] == '#')
-			{
-				coords[i][++y] = 0;
-				coords[i][++y] = 1;
-			}
-			if (str[x + 6] == '#')
-			{
-				coords[i][++y] = 1;
-				coords[i][++y] = 1;
-			}
-			if (str[x + 7] == '#')
-			{
-				coords[i][++y] = 2;
-				coords[i][++y] = 1;
-			}
-			if (str[x + 9] == '#')
-			{
-				coords[i][++y] = -1;
-				coords[i][++y] = 2;
-			}
-			if (str[x + 10] == '#')
-			{
-				coords[i][++y] = 0;
-				coords[i][++y] = 2;
-			}
-			if (str[x + 11] == '#')
-			{
-				coords[i][++y] = 1;
-				coords[i][++y] = 2;
-			}
-			if (str[x + 15] == '#')
-			{
-				coords[i][++y] = 0;
-				coords[i][++y] = 3;
-			}
-			std::cout << str << std::endl;
-			std::cout << coords[i][0] << coords[i][1] << std::endl;
-			std::cout << coords[i][2] << coords[i][3] << std::endl;
-			std::cout << coords[i][4] << coords[i][5] << std::endl;
-			std::cout << coords[i][6] << coords[i][7] << std::endl;
-			return ;
+				ft_cplus1(str, x);
+			else if (str[x + 5] == '#')
+				ft_cplus5(str, x);
+			break ;
 		}
 	}
+}
+
+void val_block::ft_cplus1(std::string str, int x)
+{
+	if (str[x + 6] == '#')
+		ft_cplus1plus6(str, x);
+	else if (str[x + 5] == '#')
+		ft_cplus1plus5(str, x);
+	else if (str[x + 2] == '#')
+		ft_cplus1plus2(str, x);
 }
 
 void val_block::find_smallest_map(int block_count)

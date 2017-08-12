@@ -13,7 +13,7 @@ class val_block
 						val_block(raw_block &test);
 						~val_block();
 		int 			convert_to_xy(void);
-		void 			extract_cords(std::string str, unsigned int i);
+		void 			extract_cords(std::string str);
 		void 			find_smallest_map(int block_count);
 		void 			empty_board();
 		void 			getBoard();
@@ -21,6 +21,7 @@ class val_block
 		void			increaseMapSize(void);
 		int  			putBlock(unsigned int row, unsigned int col, int* coords);
 		void 			remove_piece(char remove_letter);
+		void 			ft_cplus1(std::string str, int x);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;
