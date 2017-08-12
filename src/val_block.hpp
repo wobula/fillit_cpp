@@ -29,6 +29,12 @@ class val_block
 		void 			ft_cplus1plus6plus2or11(std::string str, int x, unsigned int block_index);
 		void 			ft_cplus1plus6plus5or7(std::string str, int x, unsigned int block_index);
 		void 			ft_cplus5(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5plus6(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5plus4(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5plus4plus6or9(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5plus10(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5plus10plus6or15(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5plus10plus9or11(std::string str, int x, unsigned int block_index);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;

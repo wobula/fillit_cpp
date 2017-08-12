@@ -323,6 +323,135 @@ void val_block::ft_cplus5(std::string str, int x, unsigned int block_index)
 		ft_cplus5plus6(str, x, block_index);
 }
 
+void val_block::ft_cplus5plus6(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 7] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 2;
+		cord[block_index][7] = 1;
+	}
+	else if (str[x + 11] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 1;
+		cord[block_index][7] = 2;
+	}
+}
+
+void val_block::ft_cplus5plus4(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 3] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = -1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = -2;
+		cord[block_index][7] = 1;
+	}
+	else if (str[x + 6] == '#' || str[x + 9] == '#')
+		ft_cplus5plus4plus6or9(str, x, block_index);
+}
+
+void val_block::ft_cplus5plus4plus6or9(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 9] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = -1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = -1;
+		cord[block_index][7] = 2;
+	}
+	else if (str[x + 6] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = -1;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 1;
+		cord[block_index][7] = 1;
+	}
+}
+
+void val_block::ft_cplus5plus10(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 6] == '#' || str[x + 15] == '#')
+		ft_cplus5plus10plus6or15(str, x, block_index);
+	else if (str[x + 9] == '#' || str[x + 11] == '#')
+		ft_cplus5plus10plus9or11(str, x, block_index);
+}
+
+void val_block::ft_cplus5plus10plus6or15(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 15] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 2;
+		cord[block_index][6] = 0;
+		cord[block_index][7] = 3;
+	}
+	else if (str[x + 6] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 0;
+		cord[block_index][7] = 2;
+	}
+}
+
+void val_block::ft_cplus5plus10plus9or11(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 9] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 2;
+		cord[block_index][6] = -1;
+		cord[block_index][7] = 2;
+	}
+	else if (str[x + 11] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 0;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 2;
+		cord[block_index][6] = 1;
+		cord[block_index][7] = 2;
+	}
+}
+
 void val_block::find_smallest_map(int block_count)
 {
 	int size;
