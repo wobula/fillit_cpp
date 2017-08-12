@@ -23,6 +23,9 @@ val_block::val_block(raw_block &test) : valid(&test),
 
 val_block::~val_block()
 {
+	int x = -1;
+	while (++x < total_blocks)
+		delete cord[x];
 	delete cord;
 	std::cout << "+val block destroyed" << std::endl;
 }
