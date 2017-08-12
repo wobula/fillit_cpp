@@ -302,6 +302,27 @@ void val_block::ft_cplus1plus6plus5or7(std::string str, int x, unsigned int bloc
 	}
 }
 
+void val_block::ft_cplus5(std::string str, int x, unsigned int block_index)
+{
+	if ((str[x + 4] == '#') && (str[x + 10] == '#'))
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = -1;
+		cord[block_index][3] = 1;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 0;
+		cord[block_index][7] = 2;
+	}
+	else if (str[x + 10] == '#')
+		ft_cplus5plus10(str, x, block_index);
+	else if (str[x + 4] == '#')
+		ft_cplus5plus4(str, x, block_index);
+	else if (str[x + 6] == '#')
+		ft_cplus5plus6(str, x, block_index);
+}
+
 void val_block::find_smallest_map(int block_count)
 {
 	int size;

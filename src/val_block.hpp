@@ -28,6 +28,7 @@ class val_block
 		void 			ft_cplus1plus6(std::string str, int x, unsigned int block_index);
 		void 			ft_cplus1plus6plus2or11(std::string str, int x, unsigned int block_index);
 		void 			ft_cplus1plus6plus5or7(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus5(std::string str, int x, unsigned int block_index);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;
