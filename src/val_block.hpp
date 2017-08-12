@@ -23,7 +23,11 @@ class val_block
 		void 			remove_piece(char remove_letter);
 		void 			ft_cplus1(std::string str, int x, unsigned int block_index);
 		void 			ft_cplus1plus2(std::string str, int x, unsigned int block_index);
-		void 			ft_cplus1plus5(std::string str, int x, unsigned int block_index);	
+		void 			ft_cplus1plus5(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus1plus5extra(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus1plus6(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus1plus6plus2or11(std::string str, int x, unsigned int block_index);
+		void 			ft_cplus1plus6plus5or7(std::string str, int x, unsigned int block_index);
 	private:
 		raw_block* 		valid;
 		int 	  		current_block;

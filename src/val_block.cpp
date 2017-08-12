@@ -213,7 +213,93 @@ void val_block::ft_cplus1plus5(std::string str, int x, unsigned int block_index)
 		cord[block_index][7] = 1;
 	}
 	else if (str[x + 4] == '#' || str[x + 10] == '#')
-		ft_cplus1plus5extra(str, x);
+		ft_cplus1plus5extra(str, x, block_index);
+}
+
+void val_block::ft_cplus1plus5extra(std::string str, int x, unsigned int block_index)
+{
+	if ((str[x + 4] == '#') && (str[x + 5] == '#'))
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = -1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 0;
+		cord[block_index][7] = 1;
+	}
+	else if ((str[x + 5] == '#') && (str[x + 10] == '#'))
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 0;
+		cord[block_index][7] = 2;
+	}
+}
+
+void val_block::ft_cplus1plus6(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 5] == '#' || str[x + 7] == '#')
+		ft_cplus1plus6plus5or7(str, x, block_index);
+	else if (str[x + 2] == '#' || str[x + 11] == '#')
+		ft_cplus1plus6plus2or11(str, x, block_index);
+}
+
+void val_block::ft_cplus1plus6plus2or11(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 2] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 2;
+		cord[block_index][5] = 0;
+		cord[block_index][6] = 1;
+		cord[block_index][7] = 1;
+	}
+	else if (str[x + 11] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 1;
+		cord[block_index][7] = 2;
+	}
+}
+
+void val_block::ft_cplus1plus6plus5or7(std::string str, int x, unsigned int block_index)
+{
+	if ((str[x + 5] == '#') && (str[x + 6] == '#'))
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 0;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 1;
+		cord[block_index][7] = 1;
+	}
+	else if (str[x + 6] == '#' && (str[x + 7] == '#'))
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 1;
+		cord[block_index][5] = 1;
+		cord[block_index][6] = 2;
+		cord[block_index][7] = 1;
+	}
 }
 
 void val_block::find_smallest_map(int block_count)
