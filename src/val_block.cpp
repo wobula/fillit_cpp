@@ -23,7 +23,7 @@ val_block::val_block(raw_block &test) : valid(&test),
 
 val_block::~val_block()
 {
-	delete coords;
+	delete cord;
 	std::cout << "+val block destroyed" << std::endl;
 }
 
@@ -38,7 +38,7 @@ int	 val_block::recurse(std::vector<std::string> board)
 		{
 			if (board[row][col] == '.')
 			{
-				if (putBlock(row, col, coords[current_block]))
+				if (putBlock(row, col, cord[current_block]))
 					break ;
 			}
 		}
@@ -133,20 +133,20 @@ void val_block::getBoard(void)
 int val_block::convert_to_xy(void)
 {
 	unsigned int i = -1;
-	coords = new int*[valid->getVector().size()];
+	cord = new int*[valid->getVector().size()];
 	std::cout << "-Conversion started" << std::endl;
 	std::cout << "--Block count: " << valid->getVector().size() << std::endl;
 	while (++i < valid->getVector().size())
 	{
-		coords[i] = new int[8];
+		cord[i] = new int[8];
 		std::cout << "-Extracting coords for piece: " << i << std::endl;
-		extract_cords((valid->getVector())[i]);
+		extract_cords((valid->getVector())[i], i);
 	}
 	std::cout << "--Conversion complete!" << std::endl;
 	return (1);
 }
 
-void val_block::extract_cords(std::string str)
+void val_block::extract_cords(std::string str, unsigned int block_index)
 {
 	int x = -1;
 
@@ -155,22 +155,65 @@ void val_block::extract_cords(std::string str)
 		if (str[x] == '#')
 		{
 			if (str[x + 1] == '#')
-				ft_cplus1(str, x);
+				ft_cplus1(str, x, block_index);
 			else if (str[x + 5] == '#')
-				ft_cplus5(str, x);
+				ft_cplus5(str, x, block_index);
 			break ;
 		}
 	}
 }
 
-void val_block::ft_cplus1(std::string str, int x)
+void val_block::ft_cplus1(std::string str, int x, unsigned int block_index)
 {
 	if (str[x + 6] == '#')
-		ft_cplus1plus6(str, x);
+		ft_cplus1plus6(str, x, block_index);
 	else if (str[x + 5] == '#')
-		ft_cplus1plus5(str, x);
+		ft_cplus1plus5(str, x, block_index);
 	else if (str[x + 2] == '#')
-		ft_cplus1plus2(str, x);
+		ft_cplus1plus2(str, x, block_index);
+}
+
+void val_block::ft_cplus1plus2(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 3] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 2;
+		cord[block_index][5] = 0;
+		cord[block_index][6] = 3;
+		cord[block_index][7] = 0;
+	}
+	else if (str[x + 7] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 2;
+		cord[block_index][5] = 0;
+		cord[block_index][6] = 2;
+		cord[block_index][7] = 1;
+	}
+}
+
+void val_block::ft_cplus1plus5(std::string str, int x, unsigned int block_index)
+{
+	if (str[x + 2] == '#')
+	{
+		cord[block_index][0] = 0;
+		cord[block_index][1] = 0;
+		cord[block_index][2] = 1;
+		cord[block_index][3] = 0;
+		cord[block_index][4] = 2;
+		cord[block_index][5] = 0;
+		cord[block_index][6] = 0;
+		cord[block_index][7] = 1;
+	}
+	else if (str[x + 4] == '#' || str[x + 10] == '#')
+		ft_cplus1plus5extra(str, x);
 }
 
 void val_block::find_smallest_map(int block_count)
